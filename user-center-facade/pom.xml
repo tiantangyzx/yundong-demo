@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.yundong.idaas</groupId>
+    <artifactId>user-center-facade</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>user-center-facade</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <yundong-base.version>1.9.8</yundong-base.version>
+        <lombok.version>1.18.20</lombok.version>
+        <easyexcel.verson>2.2.6</easyexcel.verson>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yundong</groupId>
+            <artifactId>yundong-base</artifactId>
+            <version>${yundong-base.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>${easyexcel.verson}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yundong.idaas</groupId>
+        <artifactId>yundong-user-center</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.yundong.idaas</groupId>
+    <artifactId>user-center-start</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <name>user-center-start</name>
+    <description>Demo project for Spring Boot</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong.idaas</groupId>
+            <artifactId>user-center-sal</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong.idaas</groupId>
+            <artifactId>user-center-domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong.idaas</groupId>
+            <artifactId>user-center-facade</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong.idaas</groupId>
+            <artifactId>user-center-application</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong.idaas</groupId>
+            <artifactId>user-center-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.yundong.usercenter.UserCenterStartApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 打包跳过测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!-- 构建镜像相关 -->
+    <profiles>
+        <profile>
+            <id>onpremise</id>
+            <properties>
+                <profile.name>onpremise</profile.name>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.spotify</groupId>
+                        <artifactId>dockerfile-maven-plugin</artifactId>
+                        <version>1.4.13</version>
+                        <executions>
+                            <execution>
+                                <id>default</id>
+                                <goals>
+                                    <goal>build</goal>
+                                    <goal>push</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!-- 请替换仓库地址 -->
+                            <repository>registry.cn-hangzhou.aliyuncs.com/XXXX/yundong-user-center</repository>
+                            <dockerfile>Dockerfile</dockerfile>
+                            <tag>1.0.0.onpremise</tag>
+                            <!-- 镜像仓库用户名密码 -->
+                            <username>XXX</username>
+                            <password>XXX</password>
+                            <buildArgs>
+                                <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                            </buildArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+</project>

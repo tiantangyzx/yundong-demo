@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.8</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.yundong.idaas</groupId>
+    <artifactId>yundong-user-center</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>yundong-user-center-demo</name>
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <module>user-center-sal</module>
+        <module>user-center-application</module>
+        <module>user-center-domain</module>
+        <module>user-center-facade</module>
+        <module>user-center-web</module>
+        <module>user-center-start</module>
+        <module>user-center-generator</module>
+    </modules>
+
+    <properties>
+        <!--    子工程版本号start   -->
+        <user.center.sal.version>1.0.0-SNAPSHOT</user.center.sal.version>
+        <user.center.domain.version>1.0.0-SNAPSHOT</user.center.domain.version>
+        <user.center.facade.version>1.0.0-SNAPSHOT</user.center.facade.version>
+        <user.center.application.version>1.0.0-SNAPSHOT</user.center.application.version>
+        <user.center.web.version>1.0.0-SNAPSHOT</user.center.web.version>
+        <user.center.start.version>1.0.0-SNAPSHOT</user.center.start.version>
+        <!--    子工程版本号end   -->
+        <!--    云动功能组件   -->
+        <yundong-base.version>1.9.8</yundong-base.version>
+        <yundong-gateway-register.version>1.0.5-SNAPSHOT</yundong-gateway-register.version>
+        <metadata.version>1.0.16</metadata.version>
+        <!--    云动功能组件   -->
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+
+        <spring-boot-starter.version>2.7.8</spring-boot-starter.version>
+        <spring.version>5.3.25</spring.version>
+        <mybatis-plus.version>3.4.1</mybatis-plus.version>
+        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo-registry-nacos.version>2.7.6</dubbo-registry-nacos.version>
+        <fasterxml.jackson.version>2.11.3</fasterxml.jackson.version>
+        <lombok.version>1.18.20</lombok.version>
+        <hutool.version>5.8.16</hutool.version>
+        <hibernate-validator.version>6.2.0.Final</hibernate-validator.version>
+        <druid-spring-boot-starter.version>1.2.6</druid-spring-boot-starter.version>
+        <mysql-connector-java.version>8.0.25</mysql-connector-java.version>
+    </properties>
+
+    <!--所有工程的依赖-->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yundong</groupId>
+            <artifactId>gateway-register-spring-boot-starter</artifactId>
+            <version>${yundong-gateway-register.version}</version>
+        </dependency>
+    </dependencies>
+
+    <!--依赖管理-->
+    <dependencyManagement>
+        <dependencies>
+            <!--子工程管理开始   -->
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-facade</artifactId>
+                <version>${user.center.facade.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-domain</artifactId>
+                <version>${user.center.domain.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-sal</artifactId>
+                <version>${user.center.sal.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-application</artifactId>
+                <version>${user.center.application.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-web</artifactId>
+                <version>${user.center.web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong.idaas</groupId>
+                <artifactId>user-center-start</artifactId>
+                <version>${user.center.start.version}</version>
+            </dependency>
+            <!--子工程管理结束   -->
+
+            <!-- 云动metadata包   -->
+            <dependency>
+                <groupId>com.yundong.metadata</groupId>
+                <artifactId>yundong-metadata-facade</artifactId>
+                <version>${metadata.version}</version>
+            </dependency>
+
+            <!-- 裸包相关 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>2021.0.4.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-bootstrap</artifactId>
+                <version>3.1.5</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-cloud-commons</artifactId>
+                        <groupId>org.springframework.cloud</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>spring-cloud-context</artifactId>
+                        <groupId>org.springframework.cloud</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.yundong</groupId>
+                <artifactId>yundong-base</artifactId>
+                <version>${yundong-base.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!--dubbo-->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo-registry-nacos.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${fasterxml.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-validator</artifactId>
+                <version>${hibernate-validator.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 环境 -->
+    <profiles>
+        <!-- 开发 -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--当前环境-->
+                <profile.name>dev</profile.name>
+                <!--配置文件前缀-->
+                <prefix.name>application</prefix.name>
+            </properties>
+        </profile>
+        <!-- 测试 -->
+        <profile>
+            <id>test</id>
+            <properties>
+                <!--当前环境-->
+                <profile.name>test</profile.name>
+                <!--配置文件前缀-->
+                <prefix.name>application</prefix.name>
+            </properties>
+        </profile>
+        <!-- 生产 -->
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!--当前环境,生产环境为空-->
+                <profile.name>prod</profile.name>
+                <!--配置文件前缀-->
+                <prefix.name>application</prefix.name>
+            </properties>
+        </profile>
+    </profiles>
+</project>
